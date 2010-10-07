@@ -83,7 +83,7 @@
             this.cmbChooseOpponentBot = new System.Windows.Forms.ComboBox();
             this.lblChooseOpponentBot = new System.Windows.Forms.Label();
             this.gbFight = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.btnFight = new System.Windows.Forms.Button();
             this.cmbMap = new System.Windows.Forms.ComboBox();
             this.lblMap = new System.Windows.Forms.Label();
@@ -694,7 +694,7 @@
             // 
             // gbFight
             // 
-            this.gbFight.Controls.Add(this.button1);
+            this.gbFight.Controls.Add(this.btnStop);
             this.gbFight.Controls.Add(this.btnFight);
             this.gbFight.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gbFight.Location = new System.Drawing.Point(547, 49);
@@ -704,16 +704,16 @@
             this.gbFight.TabStop = false;
             this.gbFight.Text = "Fight";
             // 
-            // button1
+            // btnStop
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(150, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 38);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "STOP!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStop.Location = new System.Drawing.Point(150, 19);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(109, 38);
+            this.btnStop.TabIndex = 12;
+            this.btnStop.Text = "STOP!";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnFight
             // 
@@ -1047,8 +1047,8 @@
             // backgroundWorker
             // 
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // FormMain
             // 
@@ -1060,8 +1060,8 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Galcon Bot Testing Arena - version 2.0.0";
-            this.Load += new System.EventHandler(this.frmMain_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlSetup.ResumeLayout(false);
             this.pnlSetupBody.ResumeLayout(false);
             this.tabControlMain.ResumeLayout(false);
@@ -1193,7 +1193,7 @@
         private System.Windows.Forms.Button btnDelBotRow;
         private System.Windows.Forms.Button btnAddBotRow;
         private System.Windows.Forms.Label lblBotsCommand;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Label lblToolsQuotes;
         private System.Windows.Forms.Label lblBotsQuotes;
         private System.ComponentModel.BackgroundWorker backgroundWorker;

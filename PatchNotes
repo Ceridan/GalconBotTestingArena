@@ -1,0 +1,10 @@
+Version 2.0.0 Notes:
+1. New GUI. Now main form consists of three tabs:
+	- path settings tab;
+	- tools and bot extensions dictionary;
+	- fight settings tab.
+2. Bot extensions dictionary allows you to add your own bot execution files extensions, and modify coomand string to run your bots. You can modify tools files and starting commands for it too.
+3. Multithreading supported. Now you can run your bot testing fights in several threads and stop it any time. Main form will be responsable now while test fights are running.
+
+Version issues:
+Multithreading doesn't give real calculation acceleration. Maybe this is due to intensive I/O operations.

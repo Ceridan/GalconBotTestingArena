@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
-//using System.Threading;
+using System.Threading;
 
 namespace GalconBotTestingArena
 {
@@ -129,17 +129,21 @@ namespace GalconBotTestingArena
                         + "\"" + botFight.Log().FullName + "\" "
                         + player1Cmd + " "
                         + player2Cmd;
-                    Process process = new Process();
-                    process.StartInfo.FileName = playGameExecFile;
-                    process.StartInfo.Arguments = fightCmd;
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-                    process.StartInfo.RedirectStandardOutput = true;
-                    process.StartInfo.RedirectStandardError = true;
-                    process.Start();
-                    string stdout = process.StandardOutput.ReadToEnd();
-                    string stderr = process.StandardError.ReadToEnd();
-                    process.WaitForExit();
+                    //Process process = new Process();
+                    //process.StartInfo.FileName = playGameExecFile;
+                    //process.StartInfo.Arguments = fightCmd;
+                    //process.StartInfo.UseShellExecute = false;
+                    //process.StartInfo.CreateNoWindow = true;
+                    //process.StartInfo.RedirectStandardOutput = true;
+                    //process.StartInfo.RedirectStandardError = true;
+                    //process.Start();
+                    //string stdout = process.StandardOutput.ReadToEnd();
+                    //string stderr = process.StandardError.ReadToEnd();
+                    //process.WaitForExit();
+                    ProcessRunner pr = new ProcessRunner(playGameExecFile, fightCmd);
+                    pr.ProcessWorker();
+                    string stdout = pr.OutputString();
+                    string stderr = pr.ErrorString();
 
                     StreamWriter streamWriter = new StreamWriter(botFight.ViewerInput().FullName);
                     streamWriter.WriteLine(stdout);

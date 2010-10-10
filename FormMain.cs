@@ -531,6 +531,7 @@ namespace GalconBotTestingArena
                 WriteSettingsToIni(tabControlMain.SelectedIndex);
                 if (TestFightsPrepare())
                 {
+                    threadCount = 1;
                     FightStart();
                     //dgvResultGrid.ScrollBars = ScrollBars.None;
                     //FightSimulation.MassFights(botFights, starterPackagePath, Application.StartupPath);

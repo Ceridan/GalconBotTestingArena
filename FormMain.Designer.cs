@@ -212,7 +212,8 @@
             this.gbMultiThreadingSettings.Size = new System.Drawing.Size(807, 53);
             this.gbMultiThreadingSettings.TabIndex = 1;
             this.gbMultiThreadingSettings.TabStop = false;
-            this.gbMultiThreadingSettings.Text = "Multithreading settings";
+            this.gbMultiThreadingSettings.Text = "Multithreading settings [DISABLED IN CURRENT VERSION. Only 1 thread will be creat" +
+                "ed]";
             // 
             // tbThreads
             // 
@@ -1059,7 +1060,7 @@
             this.Controls.Add(this.pnlSetup);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Galcon Bot Testing Arena - version 2.0.0";
+            this.Text = "Galcon Bot Testing Arena - version 2.0.1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlSetup.ResumeLayout(false);

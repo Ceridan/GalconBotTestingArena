@@ -132,9 +132,9 @@ namespace GalconBotTestingArena
         }
 
         // Returns winner and two ref values - errors and turns
-        public bool IsWinner(out string lastTurn, out string errors)
+        public int IsWinner(out string lastTurn, out string errors)
         {
-            bool isWinnerFlag = false;
+            int isWinnerFlag = 0;
             lastTurn = string.Empty;
             errors = string.Empty;
             if (result != null)
@@ -155,7 +155,11 @@ namespace GalconBotTestingArena
                     {
                         if ((line.Contains("Player 1 Wins!") && (player1.IsMyBot())) || (line.Contains("Player 2 Wins!") && (player2.IsMyBot())))
                         {
-                            isWinnerFlag = true;
+                            isWinnerFlag = 1;
+                        }
+                        else
+                        {
+                            isWinnerFlag = -1;
                         }
                     }
 

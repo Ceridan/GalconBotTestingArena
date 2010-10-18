@@ -60,6 +60,7 @@ namespace GalconBotTestingArena
         // Total
         private int winCount;
         private int loseCount;
+        private int drawCount;
         private double winPercent;
         private string formTitleStr;
 
@@ -726,6 +727,7 @@ namespace GalconBotTestingArena
             dgvResultGrid.Rows.Clear();
             isBackground = true;
             winCount = 0;
+            drawCount = 0;
             loseCount = 0;
             winPercent = 0;
 
@@ -775,14 +777,17 @@ namespace GalconBotTestingArena
                 for (int i = 1; i < cmbChooseOpponentBot.Items.Count; i++)
                 {
                     FileInfo fi = (FileInfo)cmbChooseOpponentBot.Items[i];
-                    if ((cbExampleBots.Checked) && (fi.DirectoryName == (starterPackagePath + "\\example_bots")))
+                    //if ((cbExampleBots.Checked) && (fi.DirectoryName == (starterPackagePath + "\\example_bots")))
+                    //if ((cbExampleBots.Checked) && (fi.DirectoryName == (Path.GetFullPath(Path.Combine(starterPackagePath, "example_bots")))))
+                    if ((cbExampleBots.Checked) && (fi.DirectoryName == Path.GetFullPath(exampleBotsPath)))
                     {
                         Bot opponentBot = new Bot(botId, fi);
                         opponentBots.Add(opponentBot);
                         botId++;
                     }
 
-                    if ((cbOtherMyBots.Checked) && (fi.DirectoryName == myBotsPath))
+                    //if ((cbOtherMyBots.Checked) && (fi.DirectoryName == myBotsPath))                    
+                    if ((cbOtherMyBots.Checked) && (fi.DirectoryName == Path.GetFullPath(myBotsPath)))
                     {
                         if ((cbMirror.Checked) || ((!cbMirror.Checked) && (fi.Name != myBot.BotFileInfo().Name)))
                         {
@@ -1042,7 +1047,7 @@ namespace GalconBotTestingArena
             int i = dgvResultGrid.Rows.Count;
             string lastTurn = string.Empty;
             string errors = string.Empty;
-            bool isWinner = botFight.IsWinner(out lastTurn, out errors);
+            int isWinner = botFight.IsWinner(out lastTurn, out errors);
 
             Color cellsColor = (i % 2 == 0) ? (Color.White) : (Color.LightGray);
 
@@ -1055,18 +1060,35 @@ namespace GalconBotTestingArena
             dgvResultGrid.Rows[i].Cells["colPlayer1"].Style.BackColor = cellsColor;
             dgvResultGrid.Rows[i].Cells["colPlayer2"].Value = botFight.Player2().BotFileInfo().Name;
             dgvResultGrid.Rows[i].Cells["colPlayer2"].Style.BackColor = cellsColor;
-            dgvResultGrid.Rows[i].Cells["colWinner"].Value = (isWinner) ? ("Win") : ("Lose");
-            dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = (isWinner) ? (Color.LightGreen) : (Color.LightPink);
+            switch (isWinner)
+            {
+                case -1:
+                    dgvResultGrid.Rows[i].Cells["colWinner"].Value = "Lose";
+                    dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = Color.LightPink;
+                    loseCount++;
+                    break;
+
+                case 0:
+                    dgvResultGrid.Rows[i].Cells["colWinner"].Value = "Draw";
+                    dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = Color.LightBlue;
+                    drawCount++;
+                    break;
+
+                case 1:
+                    dgvResultGrid.Rows[i].Cells["colWinner"].Value = "Win";
+                    dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = Color.LightGreen;
+                    winCount++;
+                    break;
+
+                default:
+                    break;
+            }
             dgvResultGrid.Rows[i].Cells["colErrors"].Value = errors;
             dgvResultGrid.Rows[i].Cells["colErrors"].Style.BackColor = cellsColor;
             dgvResultGrid.Rows[i].Cells["colTurns"].Value = lastTurn;
             dgvResultGrid.Rows[i].Cells["colTurns"].Style.BackColor = cellsColor;
             dgvResultGrid.Rows[i].Cells["colViewGame"].Style.BackColor = cellsColor;
 
-            if (isWinner)
-                winCount++;
-            else
-                loseCount++;
             progressBar.PerformStep();
         }
 
@@ -1075,13 +1097,14 @@ namespace GalconBotTestingArena
         {
             dgvResultGrid.Rows.Clear();
             winCount = 0;
+            drawCount = 0;
             loseCount = 0;
             int i = 0;
             foreach (BotFight botFight in botFights)
             {
                 string lastTurn = string.Empty;
                 string errors = string.Empty;
-                bool isWinner = botFight.IsWinner(out lastTurn, out errors);
+                int isWinner = botFight.IsWinner(out lastTurn, out errors);
 
                 Color cellsColor = (i % 2 == 0) ? (Color.White) : (Color.LightGray);
                 
@@ -1094,18 +1117,35 @@ namespace GalconBotTestingArena
                 dgvResultGrid.Rows[i].Cells["colPlayer1"].Style.BackColor = cellsColor;
                 dgvResultGrid.Rows[i].Cells["colPlayer2"].Value = botFight.Player2().BotFileInfo().Name;
                 dgvResultGrid.Rows[i].Cells["colPlayer2"].Style.BackColor = cellsColor;
-                dgvResultGrid.Rows[i].Cells["colWinner"].Value = (isWinner) ? ("Win") : ("Lose");
-                dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = (isWinner) ? (Color.LightGreen) : (Color.LightPink);
+                switch (isWinner)
+                {
+                    case -1:
+                        dgvResultGrid.Rows[i].Cells["colWinner"].Value = "Lose";
+                        dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = Color.LightPink;
+                        loseCount++;
+                        break;
+
+                    case 0:
+                        dgvResultGrid.Rows[i].Cells["colWinner"].Value = "Draw";
+                        dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = Color.LightBlue;
+                        drawCount++;
+                        break;
+
+                    case 1:
+                        dgvResultGrid.Rows[i].Cells["colWinner"].Value = "Win";
+                        dgvResultGrid.Rows[i].Cells["colWinner"].Style.BackColor = Color.LightGreen;
+                        winCount++;
+                        break;
+
+                    default:
+                        break;
+                }
                 dgvResultGrid.Rows[i].Cells["colErrors"].Value = errors;
                 dgvResultGrid.Rows[i].Cells["colErrors"].Style.BackColor = cellsColor;
                 dgvResultGrid.Rows[i].Cells["colTurns"].Value = lastTurn;
                 dgvResultGrid.Rows[i].Cells["colTurns"].Style.BackColor = cellsColor;
                 dgvResultGrid.Rows[i].Cells["colViewGame"].Style.BackColor = cellsColor;
 
-                if (isWinner)
-                    winCount++;
-                else
-                    loseCount++;
                 i++;
             }
             winPercent = ((double)winCount / (double)i) * 100;

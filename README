@@ -2,6 +2,12 @@ Application to test bots for Planet Wars (Google AI Challange) on different maps
 All information in this topic:
 http://ai-contest.com/forum/viewtopic.php?f=18&t=748
 
+Version 2.0.2 Notes:
+- Draw match results fixed. Now you can see it in the grid too.
+- Posibility of relative paths added. (Thanks to nhoel: http://ai-contest.com/forum/viewtopic.php?f=18&t=748&start=60#p6070).
+But I don't change the first tab, because it allows you to separate example_bots, tools and maps path, and make your own paths to it, not only as subfolder of starter package path. So it disallowed relative paths there.
+__________________________________________________
+
 Version 2.0.1 Notes:
 - Asynchrnous process output and error reading during test fights added.
 - Multithreading disabled, because doesn't give any advantage now.

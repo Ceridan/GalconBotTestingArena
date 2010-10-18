@@ -1060,7 +1060,7 @@
             this.Controls.Add(this.pnlSetup);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Galcon Bot Testing Arena - version 2.0.1";
+            this.Text = "Galcon Bot Testing Arena - version 2.0.2";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlSetup.ResumeLayout(false);

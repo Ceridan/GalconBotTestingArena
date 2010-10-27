@@ -112,6 +112,7 @@
             this.colErrors = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTurns = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colViewGame = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colCommand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlResultBottom = new System.Windows.Forms.Panel();
             this.cbClearLogs = new System.Windows.Forms.CheckBox();
             this.lblTotal = new System.Windows.Forms.Label();
@@ -166,7 +167,7 @@
             this.pnlSetupBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSetupBody.Location = new System.Drawing.Point(0, 25);
             this.pnlSetupBody.Name = "pnlSetupBody";
-            this.pnlSetupBody.Size = new System.Drawing.Size(831, 278);
+            this.pnlSetupBody.Size = new System.Drawing.Size(831, 271);
             this.pnlSetupBody.TabIndex = 2;
             // 
             // tabControlMain
@@ -178,7 +179,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(831, 278);
+            this.tabControlMain.Size = new System.Drawing.Size(831, 271);
             this.tabControlMain.TabIndex = 0;
             this.tabControlMain.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlMain_Selected);
             // 
@@ -188,7 +189,7 @@
             this.tpgSettings.Location = new System.Drawing.Point(4, 22);
             this.tpgSettings.Name = "tpgSettings";
             this.tpgSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgSettings.Size = new System.Drawing.Size(823, 252);
+            this.tpgSettings.Size = new System.Drawing.Size(823, 245);
             this.tpgSettings.TabIndex = 0;
             this.tpgSettings.Text = "Path Settings";
             this.tpgSettings.UseVisualStyleBackColor = true;
@@ -200,7 +201,7 @@
             this.pnlSetupBodyPathSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSetupBodyPathSettings.Location = new System.Drawing.Point(3, 3);
             this.pnlSetupBodyPathSettings.Name = "pnlSetupBodyPathSettings";
-            this.pnlSetupBodyPathSettings.Size = new System.Drawing.Size(817, 246);
+            this.pnlSetupBodyPathSettings.Size = new System.Drawing.Size(817, 239);
             this.pnlSetupBodyPathSettings.TabIndex = 6;
             // 
             // gbMultiThreadingSettings
@@ -409,7 +410,7 @@
             this.tpgBotRepository.Location = new System.Drawing.Point(4, 22);
             this.tpgBotRepository.Name = "tpgBotRepository";
             this.tpgBotRepository.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgBotRepository.Size = new System.Drawing.Size(823, 252);
+            this.tpgBotRepository.Size = new System.Drawing.Size(823, 245);
             this.tpgBotRepository.TabIndex = 2;
             this.tpgBotRepository.Text = "Tools & Bots Repository";
             this.tpgBotRepository.UseVisualStyleBackColor = true;
@@ -614,7 +615,7 @@
             this.tpgFight.Location = new System.Drawing.Point(4, 22);
             this.tpgFight.Name = "tpgFight";
             this.tpgFight.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgFight.Size = new System.Drawing.Size(823, 252);
+            this.tpgFight.Size = new System.Drawing.Size(823, 245);
             this.tpgFight.TabIndex = 1;
             this.tpgFight.Text = "Testing Arena";
             this.tpgFight.UseVisualStyleBackColor = true;
@@ -637,7 +638,7 @@
             this.pnlSetupBodyFightSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSetupBodyFightSettings.Location = new System.Drawing.Point(3, 3);
             this.pnlSetupBodyFightSettings.Name = "pnlSetupBodyFightSettings";
-            this.pnlSetupBodyFightSettings.Size = new System.Drawing.Size(817, 246);
+            this.pnlSetupBodyFightSettings.Size = new System.Drawing.Size(817, 239);
             this.pnlSetupBodyFightSettings.TabIndex = 8;
             // 
             // tbTimeAmount
@@ -835,14 +836,18 @@
             // 
             // pnlSetupBottom
             // 
+            this.pnlSetupBottom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSetupBottom.Controls.Add(this.btnSave);
             this.pnlSetupBottom.Controls.Add(this.progressBar);
             this.pnlSetupBottom.Controls.Add(this.lblErrors);
             this.pnlSetupBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSetupBottom.Location = new System.Drawing.Point(0, 303);
+            this.pnlSetupBottom.Location = new System.Drawing.Point(0, 296);
             this.pnlSetupBottom.Name = "pnlSetupBottom";
-            this.pnlSetupBottom.Size = new System.Drawing.Size(831, 25);
+            this.pnlSetupBottom.Size = new System.Drawing.Size(831, 32);
             this.pnlSetupBottom.TabIndex = 1;
+            this.pnlSetupBottom.MouseLeave += new System.EventHandler(this.pnlSetupBottom_MouseLeave);
+            this.pnlSetupBottom.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlSetupBottom_MouseMove);
+            this.pnlSetupBottom.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlSetupBottom_MouseUp);
             // 
             // btnSave
             // 
@@ -922,13 +927,15 @@
             this.colWinner,
             this.colErrors,
             this.colTurns,
-            this.colViewGame});
+            this.colViewGame,
+            this.colCommand});
             this.dgvResultGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResultGrid.Location = new System.Drawing.Point(0, 0);
             this.dgvResultGrid.Name = "dgvResultGrid";
             this.dgvResultGrid.Size = new System.Drawing.Size(732, 158);
             this.dgvResultGrid.TabIndex = 0;
             this.dgvResultGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResultGrid_CellContentClick);
+            this.dgvResultGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.dgvResultGrid_SortCompare);
             // 
             // colID
             // 
@@ -992,6 +999,14 @@
             this.colViewGame.Name = "colViewGame";
             this.colViewGame.ReadOnly = true;
             this.colViewGame.Width = 50;
+            // 
+            // colCommand
+            // 
+            this.colCommand.FillWeight = 500F;
+            this.colCommand.HeaderText = "Command";
+            this.colCommand.Name = "colCommand";
+            this.colCommand.ReadOnly = true;
+            this.colCommand.Width = 500;
             // 
             // pnlResultBottom
             // 
@@ -1060,7 +1075,7 @@
             this.Controls.Add(this.pnlSetup);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Galcon Bot Testing Arena - version 2.0.2";
+            this.Text = "Galcon Bot Testing Arena - version 2.0.3";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.pnlSetup.ResumeLayout(false);
@@ -1167,14 +1182,6 @@
         private System.Windows.Forms.Button btnStarterPackagePath;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.DataGridView dgvResultGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPlayer1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPlayer2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWinner;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colErrors;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTurns;
-        private System.Windows.Forms.DataGridViewButtonColumn colViewGame;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblResultHeader;
         private System.Windows.Forms.Panel pnlBots;
@@ -1198,6 +1205,15 @@
         private System.Windows.Forms.Label lblToolsQuotes;
         private System.Windows.Forms.Label lblBotsQuotes;
         private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMap;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPlayer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPlayer2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWinner;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colErrors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTurns;
+        private System.Windows.Forms.DataGridViewButtonColumn colViewGame;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCommand;
     }
 }
 

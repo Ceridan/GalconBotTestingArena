@@ -63,6 +63,8 @@ namespace GalconBotTestingArena
         private int drawCount;
         private double winPercent;
         private string formTitleStr;
+        private int fightCount;
+        private int totalTurnNumbers;
 
 
 
@@ -730,6 +732,8 @@ namespace GalconBotTestingArena
             drawCount = 0;
             loseCount = 0;
             winPercent = 0;
+            fightCount = 0;
+            totalTurnNumbers = 0;
 
             progressBar.Visible = true;
             progressBar.Minimum = 1;
@@ -750,8 +754,14 @@ namespace GalconBotTestingArena
             dgvResultGrid.Dock = DockStyle.Fill;*/
             isBackground = false;
             this.Text = formTitleStr;
-            winPercent = ((double)winCount / (double)botFights.Count) * 100;
-            lblTotal.Text = String.Format("Total:    Wins/Games: {0}/{1},    Win %: {2:N}", winCount, botFights.Count, winPercent);
+            //winPercent = ((double)winCount / (double)botFights.Count) * 100;
+            int avgTurnNumbers = 0;
+            if (fightCount > 0)
+            {
+                winPercent = ((double)winCount / (double)fightCount) * 100;
+                avgTurnNumbers = (int)Math.Ceiling((double)totalTurnNumbers / (double)fightCount);
+            }
+            lblTotal.Text = String.Format("Wins: {0}, Loses: {1}, Draws: {2}    |    Total:  Wins/Games: {3}/{4},    Win %: {5:N}    |    Avg. turn numbers: {6}", winCount, loseCount, drawCount, winCount, fightCount, winPercent, avgTurnNumbers);
         }
 
         // Test fights
@@ -1088,6 +1098,17 @@ namespace GalconBotTestingArena
             dgvResultGrid.Rows[i].Cells["colTurns"].Value = lastTurn;
             dgvResultGrid.Rows[i].Cells["colTurns"].Style.BackColor = cellsColor;
             dgvResultGrid.Rows[i].Cells["colViewGame"].Style.BackColor = cellsColor;
+            dgvResultGrid.Rows[i].Cells["colCommand"].Value = botFight.Command();            
+
+            fightCount++;
+            totalTurnNumbers += Convert.ToInt32(lastTurn.Substring(5));
+            int avgTurnNumbers = 0;
+            if (fightCount > 0)
+            {
+                winPercent = ((double)winCount / (double)fightCount) * 100;
+                avgTurnNumbers = (int)Math.Ceiling((double)totalTurnNumbers / (double)fightCount);
+            }
+            lblTotal.Text = String.Format("Wins: {0}, Loses: {1}, Draws: {2}    |    Total:  Wins/Games: {3}/{4},    Win %: {5:N}    |    Avg. turn numbers: {6}", winCount, loseCount, drawCount, winCount, fightCount, winPercent, avgTurnNumbers);
 
             progressBar.PerformStep();
         }
@@ -1224,7 +1245,7 @@ namespace GalconBotTestingArena
             else
             {
                 pnlSetup.Dock = DockStyle.Top;
-                Size size = new System.Drawing.Size(pnlSetup.Size.Width, 200);
+                Size size = new System.Drawing.Size(pnlSetup.Size.Width, 250);
                 pnlSetup.Size = size;
                 pnlResult.Dock = DockStyle.Fill;
                 progressBar.Visible = true;
@@ -1520,6 +1541,75 @@ namespace GalconBotTestingArena
             DataGridViewResultOnFly(botFights[(int)e.UserState - 1]);
             this.Text = dgvResultGrid.Rows.Count.ToString() + " of " +
                         botFights.Count.ToString() + " - " + formTitleStr;
+        }
+
+        private void dgvResultGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if ((e.Column == dgvResultGrid.Columns["colID"]) || (e.Column == dgvResultGrid.Columns["colTurns"]))
+            {
+                if ((e.CellValue1 == null) || (e.CellValue1.ToString() == ""))
+                {
+                    if ((e.CellValue2 == null) || (e.CellValue2.ToString() == ""))
+                        e.SortResult = 0;
+                    else
+                        e.SortResult = -1;
+                }
+                else
+                {
+                    if ((e.CellValue2 == null) || (e.CellValue2.ToString() == ""))
+                        e.SortResult = 1;
+                    else
+                    {
+                        string value1 = string.Empty;
+                        string value2 = string.Empty;
+                        if (e.Column == dgvResultGrid.Columns["colTurns"])
+                        {
+                            value1 = e.CellValue1.ToString().Substring(5);
+                            value2 = e.CellValue2.ToString().Substring(5);
+                        }
+                        else
+                        {
+                            value1 = e.CellValue1.ToString();
+                            value2 = e.CellValue2.ToString();
+                        }
+
+                        int p1 = Convert.ToInt32(value1);
+                        int p2 = Convert.ToInt32(value2);
+                        if (p1 < p2)
+                            e.SortResult = -1;
+                        else if (p1 > p2)
+                            e.SortResult = 1;
+                        else
+                            e.SortResult = 0;
+                    }
+                }
+                e.Handled = true;
+            }
+
+        }
+
+        private void pnlSetupBottom_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((Math.Abs(e.Y -  pnlSetupBottom.Size.Height) <= 5) && (tabControlMain.SelectedIndex == 2))
+            {
+                this.Cursor = Cursors.HSplit;
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void pnlSetupBottom_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+
+        private void pnlSetupBottom_MouseUp(object sender, MouseEventArgs e)
+        {
+            int prevY = pnlSetup.Size.Height;
+            Size size = new System.Drawing.Size(pnlSetup.Size.Width, e.Y - pnlSetupBottom.Size.Height + prevY);
+            pnlSetup.Size = size;
         }
     }
 }

@@ -140,6 +140,7 @@ namespace GalconBotTestingArena
                     //string stdout = process.StandardOutput.ReadToEnd();
                     //string stderr = process.StandardError.ReadToEnd();
                     //process.WaitForExit();
+                    botFight.Command(playGameExecFile + " " + fightCmd);
                     ProcessRunner pr = new ProcessRunner(playGameExecFile, fightCmd);
                     pr.ProcessWorker();
                     string stdout = pr.OutputString();

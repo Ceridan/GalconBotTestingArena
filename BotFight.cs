@@ -19,9 +19,10 @@ namespace GalconBotTestingArena
             this.result = null;
             this.viewerInput = null;
             this.status = 0;
+            this.command = string.Empty;
         }
 
-        public BotFight(int fightId, Map fightMap, Bot player1, Bot player2, int turnAmount, int timeAmount, FileInfo log, FileInfo result, FileInfo viewerInput, int status)
+        public BotFight(int fightId, Map fightMap, Bot player1, Bot player2, int turnAmount, int timeAmount, FileInfo log, FileInfo result, FileInfo viewerInput, int status, string command)
         {
             this.fightId = fightId;
             this.fightMap = fightMap;
@@ -33,6 +34,7 @@ namespace GalconBotTestingArena
             this.result = result;
             this.viewerInput = viewerInput;
             this.status = status;
+            this.command = command;
         }
 
         public int FightId()
@@ -85,6 +87,11 @@ namespace GalconBotTestingArena
             return status;
         }
 
+        public string Command()
+        {
+            return command;
+        }
+
 
         public void FightMap(Map newFightMap)
         {
@@ -129,6 +136,11 @@ namespace GalconBotTestingArena
         public void Status(int newStatus)
         {
             this.status = newStatus;
+        }
+
+        public void Command(string newCommand)
+        {
+            this.command = newCommand;
         }
 
         // Returns winner and two ref values - errors and turns
@@ -181,6 +193,7 @@ namespace GalconBotTestingArena
         private int turnAmount;
         private int timeAmount;
         private int status;
+        private string command;
 
     }
 }

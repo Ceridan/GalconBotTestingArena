@@ -2,6 +2,14 @@ Application to test bots for Planet Wars (Google AI Challange) on different maps
 All information in this topic:
 http://ai-contest.com/forum/viewtopic.php?f=18&t=748
 
+Version 2.0.3 Notes:
+- Now fight total label updates on fly. So you can see win/lose/draw information immidiatly after each fight was finished.
+- Added average turns number statistic in the fight total label.
+- Added 'Command' column to the grid. You can see command which was executed to run this fight. So it coan be useuful for debugging this application. You can always save the value from the cell to clipboard (Ctrl+C) and then paste (Ctrl+V) it to command line and execute to test how it works.
+- Fights tab scaling changed a bit (specially for Hazard :) ) and now you can resize two parts of the fights tab (if you move mouse to the border between progress bar and 'Galcon Bot Testing Arena result' panel you will see that cursor will changed and you can drag it to resize the panels).
+__________________________________________________
+
+
 Version 2.0.2 Notes:
 - Draw match results fixed. Now you can see it in the grid too.
 - Posibility of relative paths added. (Thanks to nhoel: http://ai-contest.com/forum/viewtopic.php?f=18&t=748&start=60#p6070).

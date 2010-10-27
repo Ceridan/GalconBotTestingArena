@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlSetup = new System.Windows.Forms.Panel();
-            this.pnlSetupBody = new System.Windows.Forms.Panel();
+            this.pnlSetupBody = new System.Windows.Forms.Panel(); 
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tpgSettings = new System.Windows.Forms.TabPage();
             this.pnlSetupBodyPathSettings = new System.Windows.Forms.Panel();

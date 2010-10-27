@@ -11,7 +11,7 @@ namespace GalconBotTestingArena
     {
         private static string[] ExecFileArgsMaker(string path, string gameFile, string gameCmd)
         {
-            string[] resExecArr = new string[2];
+            string[] resExecArr = new string[2]; 
 
             string gamePath = (gameFile.Contains("\"")) ? (gameFile) : ("\"" + path + "/" + gameFile + "\"");
             string execFile = string.Empty;

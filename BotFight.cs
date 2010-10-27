@@ -9,7 +9,7 @@ namespace GalconBotTestingArena
     {
         public BotFight(int fightId, Map fightMap, Bot player1, Bot player2, int turnAmount, int timeAmount)
         {
-            this.fightId = fightId;
+            this.fightId = fightId; 
             this.fightMap = fightMap;
             this.player1 = player1;
             this.player2 = player2;

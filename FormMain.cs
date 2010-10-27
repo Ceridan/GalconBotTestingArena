@@ -15,7 +15,7 @@ namespace GalconBotTestingArena
     public partial class FormMain : Form
     {
         // Settings in ini file
-        private IniFile SettingsIni;
+        private IniFile SettingsIni; 
 
         //Paths
         private string starterPackagePath;

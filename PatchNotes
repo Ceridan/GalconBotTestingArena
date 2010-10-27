@@ -1,5 +1,5 @@
 __________________________________________________
-Version 2.0.3 Notes:
+Version 2.0.3 Notes: 
 - Now fight total label updates on fly. So you can see win/lose/draw information immidiatly after each fight was finished.
 - Added average turns number statistic in the fight total label.
 - Added 'Command' column to the grid. You can see command which was executed to run this fight. So it coan be useuful for debugging this application. You can always save the value from the cell to clipboard (Ctrl+C) and then paste (Ctrl+V) it to command line and execute to test how it works.
